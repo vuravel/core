@@ -19,7 +19,7 @@ class Model extends LaravelModel
         if(static::UPDATED_BY)
     	   $this->{static::UPDATED_BY} = auth()->user()->id;
 
-    	parent::save();
+    	parent::save($options);
     }
 
     public function deletable()

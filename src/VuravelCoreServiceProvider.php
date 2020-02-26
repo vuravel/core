@@ -16,7 +16,6 @@ class VuravelCoreServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/vuravel.php', 'vuravel');
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
 
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'vuravel-core');
