@@ -6,6 +6,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class SessionAuthorizationRequest extends FormRequest
 {
@@ -55,6 +56,22 @@ class SessionAuthorizationRequest extends FormRequest
     public function rules()
     {
         return [];
+    }
+
+    /**
+     * Gets the new custom
+     *
+     * @return     Illuminate\Auth\Access\AuthorizationException
+     */
+    protected function failedAuthorization()
+    {
+        if(method_exists($this->object, 'failedAuthorization'))
+            return $this->object->failedAuthorization();
+
+        if($this->object->getFailedAuthorizationMessage())
+            throw new AuthorizationException($this->object->getFailedAuthorizationMessage());
+
+        parent::failedAuthorization(); 
     }
 
     protected function authorizeFromParentUri()
