@@ -44,7 +44,7 @@ class SessionAuthorizationRequest extends FormRequest
                                 $this->authorizeFromParentUri()))
             return false;
 
-        $this->object->finishReboot();
+        $this->object->finishReboot($this->header('X-Vuravel-Includes') ?: null);
         return true;
     }
 

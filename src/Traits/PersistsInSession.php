@@ -41,8 +41,8 @@ trait PersistsInSession {
             'vuravelClass' => get_class($this),
             'store' => $this->store(),
             'parameters' => $this->parameters(),
-            'uri' => optional(request()->route())->uri(), //optional cuz tests fail (route null)
-            'methods' => optional(request()->route())->methods()[0] //optional cuz tests fail (route null)
+            'uri' => optional(request()->route())->uri(), //optional for tests fail (route null)
+            'methods' => optional(request()->route())->methods()[0] //optional for tests fail (route null)
         ];
     }
 
