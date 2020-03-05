@@ -21,13 +21,12 @@ class Directory
     /**
      * Returns a flattened collection of Fileclasses in a path/array of paths
      *
-     * @param  array|string $path
+     * @param  array|string $paths
      * @return array
      */
-    public static function files($path)
+    public static function files($paths)
     {
-    	$path = is_array($path) ? $path : [$path];
-    	return collect($path)->flatMap(function($path){
+    	return collect((array) $paths)->flatMap(function($path){
     		return static::getDirectoryFiles($path);
     	})->toArray();
     }

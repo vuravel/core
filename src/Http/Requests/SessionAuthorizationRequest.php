@@ -34,6 +34,7 @@ class SessionAuthorizationRequest extends FormRequest
         if(!($this->sessionObject = Arr::get(session('bootedElements'), $this->header('X-Vuravel-Id'))))
             return false;
 
+
         $objectClass = $this->sessionObject['vuravelClass'];
         $this->object = with(new $objectClass(true))
                             ->rebootFromSession($this->sessionObject)
@@ -45,6 +46,7 @@ class SessionAuthorizationRequest extends FormRequest
             return false;
 
         $this->object->finishReboot($this->header('X-Vuravel-Includes') ?: null);
+
         return true;
     }
 
@@ -78,6 +80,7 @@ class SessionAuthorizationRequest extends FormRequest
     {
         if(in_array($this->vlUri(),[  //if the element was booted in those methods, it's already authorized
             'vuravel/form/db/update',
+            'vuravel/form/include-fields',
             'vuravel/catalog/browse'
         ]))
             return true;
